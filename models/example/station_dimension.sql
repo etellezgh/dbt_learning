@@ -1,8 +1,19 @@
 WITH BIKE as (
 
-select distinct start_statio_id as station_id,start_station_name as station_name ,start_lat as station_lat,start_lng as station_lng from {{ source('demo', 'bike') }}
-where RIDE_ID !='ride_id'
+select
+distinct
+START_STATIO_ID AS station_id,
+start_station_name as station_name,
+START_LAT as station_lat,
+START_LNG as start_station_lng
+
+from {{ ref('stg_bike') }}
+
+where RIDE_ID != '"bikeid"'
+
 
 )
 
-select * from BIKE
+select
+*
+from BIKE
